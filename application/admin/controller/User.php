@@ -5,7 +5,7 @@ use app\common\controller\AdminBase;
 use app\common\model\AdminUser as AU;
 use think\Config;
 
-class AdminUser extends AdminBase{
+class User extends AdminBase{
     
     protected $admin_user_model;
 
