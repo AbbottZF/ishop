@@ -22,10 +22,12 @@ class GoodsType extends AdminBase{
      * 获取列表
      */
     public function getPage(){
-        $data = $this->request->param();
-        $data['page'] = empty($data['page'])?1:$data['page'];
-        $list = $this->goods_type_model->getPage($data['page'],['status'=>1]);
-        return adminMsg($list);
+        if($this->request->isPost()){
+            $data = $this->request->param();
+            $data['page'] = empty($data['page'])?1:$data['page'];
+            $list = $this->goods_type_model->getPage($data['page'],['status'=>1]);
+            return adminMsg($list);
+        }
     }
 }
 

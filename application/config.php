@@ -238,4 +238,6 @@ return [
         'var_page'  => 'page',
         'list_rows' => 15,
     ],
+    // 全站加密密钥
+    'salt' => '8BXuQ5LG8dHKkiuO',
 ];
