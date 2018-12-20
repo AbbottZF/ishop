@@ -21,13 +21,13 @@ class User extends AdminBase{
             writerLog('---5---');
         if($this->request->isPost()){
             $data = $this->request->param();
-            writerLog($data);
             $where = [
                 'name'=>$data['name'],
                 'password'=> md5($data['password'].Config::get('salf')),
                 'status'=>1
             ];
             $info = $this->admin_user_model->getInfo($where);
+            writerLog($data);
             return adminMsg($info);
         }
     }
