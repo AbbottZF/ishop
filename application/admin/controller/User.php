@@ -20,6 +20,9 @@ class User extends AdminBase{
     public function login(){
         if($this->request->isPost()){
             $data = $this->request->param();
+            if(empty($data['username']) || empty($data['password'])){
+                return adminErr('数据校验不通过！');
+            }
             $where = [
                 'name'=>$data['username'],
                 'password'=> md5($data['password'].Config::get('salf')),
