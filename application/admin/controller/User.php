@@ -27,7 +27,7 @@ class User extends AdminBase{
                 'status'=>1
             ];
             $info = $this->admin_user_model->getInfo($where);
-            writerLog($data);
+            writerLog($info);
             return adminMsg($info);
         }
     }
