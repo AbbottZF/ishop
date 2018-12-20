@@ -11,6 +11,7 @@ use think\Controller;
 
 class AdminBase extends Controller{
     
+    
     protected function _initialize() {
         parent::_initialize();
     }
