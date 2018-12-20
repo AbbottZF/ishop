@@ -2,7 +2,7 @@
 namespace app\common\model;
 use think\Model;
 
-class GoodsType extends Model{
+class Goods extends Model{
     
     /**
      * 分页获取数据

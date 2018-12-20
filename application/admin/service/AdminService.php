@@ -1,18 +1,16 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 namespace app\admin\service;
 
 class AdminService {
     
     public static $msg = [
         0 => '数据验证不通过！',
-        1 => '请求成功！',
-        2 => '',
+        100 => '数据获取失败！',
+        101 => '数据获取成功！',
+        1000=>'添加失败！',
+        1001=>'添加成功！',
+        2000=>'保存失败！',
+        2001=>'保存成功！',
         808 => "未识别错误！",
     ];
     

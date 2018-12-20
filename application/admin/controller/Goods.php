@@ -1,23 +1,16 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 namespace app\admin\controller;
 use app\common\controller\AdminBase;
-use app\common\model\GoodsType as GT;
+use app\common\model\Goods as G;
 
-class GoodsType extends AdminBase{
+class Goods extends AdminBase{
     
-    protected $goods_type_model;
+    protected $goods_model;
     
     protected function _initialize() {
         parent::_initialize();
-        $this->goods_type_model = new GT();
+        $this->goods_model = new G();
     }
-    
     /**
      * 获取列表
      * @return type
@@ -38,7 +31,7 @@ class GoodsType extends AdminBase{
         if($this->request->isPost()){
             $data = $this->request->param();
             $data['status'] = 1;
-            $vali = \think\Loader::validate('GoodsType');
+            $vali = \think\Loader::validate('Goods');
             if(!$vali->scene('create')->check($data)){
                 return adminErr(0,$vali->getError());
             }
@@ -53,7 +46,7 @@ class GoodsType extends AdminBase{
     public function updateInfo(){
         if($this->request->isPost()){
             $data = $this->request->param();
-            $vali = \think\Loader::validate('GoodsType');
+            $vali = \think\Loader::validate('Goods');
             if(!$vali->scene('update')->check($data)){
                 return adminErr(0,$vali->getError());
             }
@@ -78,4 +71,3 @@ class GoodsType extends AdminBase{
         }
     }
 }
-
