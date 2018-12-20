@@ -18,11 +18,10 @@ class User extends AdminBase{
      * @return type
      */
     public function login(){
-            writerLog('---5---');
         if($this->request->isPost()){
             $data = $this->request->param();
             $where = [
-                'name'=>$data['name'],
+                'name'=>$data['username'],
                 'password'=> md5($data['password'].Config::get('salf')),
                 'status'=>1
             ];
