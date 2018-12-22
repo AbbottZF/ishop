@@ -74,7 +74,7 @@ class GoodsType extends AdminBase{
                 return adminErr();
             }
             $info = $this->goods_type_model->getInfo(['id'=>$data['goos_type_id']]);
-            return adminMsg($info);
+            return adminMsg(101,$info);
         }
     }
 }

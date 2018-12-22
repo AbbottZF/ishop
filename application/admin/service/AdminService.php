@@ -5,7 +5,7 @@ class AdminService {
     
     public static $msg = [
         0 => '数据验证不通过！',
-        100 => '数据获取失败！',
+        1 => 'success！',
         101 => '数据获取成功！',
         1000=>'添加失败！',
         1001=>'添加成功！',
@@ -18,6 +18,6 @@ class AdminService {
      * 获取错误消息
      */
     public static function getMsg($code) {
-        return isset(self::$msg[$code]) ? self::$msg[$code] : self::getMsg(100);
+        return isset(self::$msg[$code]) ? self::$msg[$code] : self::getMsg(0);
     }
 }

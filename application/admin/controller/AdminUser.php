@@ -5,7 +5,7 @@ use app\common\controller\AdminBase;
 use app\common\model\AdminUser as AU;
 use think\Config;
 
-class User extends AdminBase{
+class AdminUser extends AdminBase{
     
     protected $admin_user_model;
 
@@ -29,7 +29,18 @@ class User extends AdminBase{
                 'status'=>1
             ];
             $info = $this->admin_user_model->getInfo($where);
-            return adminMsg($info);
+            return adminMsg(1,['token'=>'amdmin']);
+        }
+    }
+    public function getInfo(){
+        if($this->request->isPost()){
+            return adminMsg(1,['avatar'=>'http://thirdwx.qlogo.cn/mmopen/o2GQP0lHTgIxicDrXKjKxpZFnFX0tRIod8vavsufrbpPPPSO2C8K5bIYOSE2tZXibYZBhu8HXIRtxRIzfpyvI4riaCFBjhMKyao/132','name'=>'admin','roles'=>['admin']]);//测试
+        }
+    }
+    
+    public function logOut(){
+        if($this->request->isPost()){
+            return adminMsg(1,['token'=>'admin']);
         }
     }
 }
