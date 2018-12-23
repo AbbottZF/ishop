@@ -27,7 +27,7 @@ class GoodsType extends AdminBase{
             $data = $this->request->param();
             $data['page'] = empty($data['page'])?1:$data['page'];
             $list = $this->goods_type_model->getPage($data['page'],['status'=>1]);
-            return adminMsg(101,$list);
+            return adminMsg(1,$list);
         }
     }
     /**
