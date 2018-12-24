@@ -21,15 +21,23 @@ class AdminUser extends AdminBase{
         if($this->request->isPost()){
             $data = $this->request->param();
             if(empty($data['username']) || empty($data['password'])){
-                return adminErr('数据校验不通过！');
+                return adminErr();
             }
-            $where = [
-                'name'=>$data['username'],
-                'password'=> md5($data['password'].Config::get('salf')),
-                'status'=>1
-            ];
-            $info = $this->admin_user_model->getInfo($where);
-            return adminMsg(1,['token'=>'amdmin']);
+            $where = ['name'=>$data['username']];
+            $where['password'] = md5($data['password'].Config::get('salf'));
+            $info = $this->admin_user_model->getInfo($where,'id,status');
+            if(empty($info)){
+                return adminErr(0,'用户不存在，或账号、密码错误！');
+            }
+            if($info['status'] !== 1){
+                return adminErr(0,'用户已禁用！');
+            }
+            $res = $this->admin_user_model->updateInfo(['last_login_time'=> time(),'last_login_ip'=> $this->request->ip()],['id'=>$info['id']]);
+            if($res ===  false){
+                return adminErr(0,'登录失败！');
+            }
+            $token = 'admin';
+            return adminMsg(1,['token'=>uniqid()]);
         }
     }
     public function getInfo(){

@@ -10,7 +10,7 @@ class GoodsType extends Model{
      * @param type $condition
      */
     public function getPage($page=1,$where=[],$order = 'create_time desc'){
-        return $this->where($where)->order($order)->paginate(15,false,['page'=>$page])->each(function($item,$key){});
+        return $this->where($where)->order($order)->paginate(10,false,['page'=>$page])->each(function($item,$key){});
     }
     /**
      * 新增数据

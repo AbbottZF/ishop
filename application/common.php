@@ -1,4 +1,9 @@
 <?php
+
+function getAdminToken($admin_id){
+    return md5(md5($admin_id). md5(config('salf')) . md5(time()) );
+    uniqid();
+}
 /**
  * 后台接口返回
  * @param type $code
