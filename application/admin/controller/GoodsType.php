@@ -26,7 +26,14 @@ class GoodsType extends AdminBase{
         if($this->request->isPost()){
             $data = $this->request->param();
             $data['page'] = empty($data['page'])?1:$data['page'];
-            $list = $this->goods_type_model->getPage($data['page'],['status'=>1]);
+            $where = ['status'=>1];
+            if(isset($data['parent_id']) && $data['parent_id'] >= 0){
+                $where['parent_id'] = $data['parent_id'];
+            }
+            if(!empty($data['name'])){
+                $where['name'] = ['LIKE',"%".$data['name']."%"];
+            }
+            $list = $this->goods_type_model->getPage($data['page'],$where);
             return adminMsg(1,$list);
         }
     }
@@ -75,6 +82,26 @@ class GoodsType extends AdminBase{
             }
             $info = $this->goods_type_model->getInfo(['id'=>$data['goos_type_id']]);
             return adminMsg(101,$info);
+        }
+    }
+    public function getColumn(){
+        if($this->request->isPost()){
+            $data = $this->request->param();
+            if(!isset($data['parent_id'])){
+                return adminErr();
+            }
+            $info = $this->goods_type_model->getColumn(['parent_id'=>$data['parent_id']],'id,name');
+            return adminMsg(1,$info);
+        }
+    }
+    public function getList(){
+        if($this->request->isPost()){
+            $data = $this->request->param();
+            if(!isset($data['parent_id'])){
+                return adminErr();
+            }
+            $info = $this->goods_type_model->getList(['parent_id'=>$data['parent_id']],'id,name');
+            return adminMsg(1,$info);
         }
     }
 }

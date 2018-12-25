@@ -10,7 +10,9 @@ class GoodsType extends Model{
      * @param type $condition
      */
     public function getPage($page=1,$where=[],$order = 'create_time desc'){
-        return $this->where($where)->order($order)->paginate(10,false,['page'=>$page])->each(function($item,$key){});
+        return $this->where($where)->order($order)->paginate(10,false,['page'=>$page])->each(function($item,$key){
+            $item['index'] = $key+1;
+        });
     }
     /**
      * 新增数据
@@ -59,8 +61,8 @@ class GoodsType extends Model{
      * @param type $field
      * @return type
      */
-    public function getColumn($where=[],$field='id'){
-        return $this->where($where)->column($field);
+    public function getColumn($where=[],$field='id',$order='sort desc,create_time desc'){
+        return $this->where($where)->order($order)->column($field);
     }
     /**
      * 获取集合
@@ -69,7 +71,7 @@ class GoodsType extends Model{
      * @param type $order
      * @return type
      */
-    public function getList($where=[],$field=true,$order='create_time desc'){
+    public function getList($where=[],$field=true,$order='sort desc,create_time desc'){
         return $this->field($field)->where($where)->order($order)->select();
     }
 }
