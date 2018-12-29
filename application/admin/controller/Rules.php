@@ -18,16 +18,18 @@ class Rules extends AdminBase{
      * 新增数据
      * @return type
      */
-    public function createInfo(){
+    public function create(){
         if($this->request->isPost()){
             $data = $this->request->param();
+            $data['sort'] = 0;
             $data['status'] = 1;
             $vali = \think\Loader::validate('Rules');
             if(!$vali->scene('create')->check($data)){
                 return adminErr(0,$vali->getError());
             }
-            $res = $this->goods_type_model->createInfo($data);
-            return $res === FALSE ? adminErr(1000): adminMsg(1001,$res);
+            $data['meta'] = json_encode($data['meta'],JSON_UNESCAPED_UNICODE);
+            $res = $this->rules_model->createInfo($data);
+            return $res === FALSE ? adminErr(1000): adminMsg(1,$res);
         }
     }
     /**
@@ -40,7 +42,7 @@ class Rules extends AdminBase{
             if(!isset($data['parent_id'])){
                 return adminErr();
             }
-            $info = $this->goods_type_model->getColumn(['parent_id'=>$data['parent_id']],'id,name');
+            $info = $this->rules_model->getColumn(['parent_id'=>$data['parent_id']],'id,name');
             return adminMsg(1,$info);
         }
     }
@@ -54,7 +56,7 @@ class Rules extends AdminBase{
             if(!isset($data['parent_id'])){
                 return adminErr();
             }
-            $info = $this->goods_type_model->getColumn(['parent_id'=>$data['parent_id']],'name',TRUE);
+            $info = $this->rules_model->getColumn(['parent_id'=>$data['parent_id']],'name',TRUE);
             return adminMsg(1,$info);
         }
     }
