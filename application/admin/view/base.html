@@ -6,6 +6,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>ishop 后台管理</title>
+{block name="css"}{/block}
 <link rel="stylesheet" href="/static/layui/css/layui.css">
 </head>
 <body class="layui-layout-body">
@@ -67,7 +68,7 @@
   
   <div class="layui-body">
     <!-- 内容主体区域 -->
-    <div style="padding: 15px;">内容主体区域</div>
+    {block name="body"}{/block}
   </div>
   
   <div class="layui-footer">
@@ -76,6 +77,7 @@
   </div>
 </div>
 <script src="/static/layui/layui.js"></script>
+{block name="js"}{/block}
 <script>
 //JavaScript代码区域
 layui.use('element', function(){
@@ -83,5 +85,6 @@ layui.use('element', function(){
   
 });
 </script>
+{block name="script"} {/block}
 </body>
 </html>
